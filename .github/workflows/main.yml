@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Take photo of github.com
-        uses: ./.github/actions/action
+        uses: "muhameddelic/puppeteer-screenshot-action@1.0.2"
         with:
           url: https://github.com
           width: 2560
