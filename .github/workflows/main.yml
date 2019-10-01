@@ -9,7 +9,7 @@ jobs:
     
     steps:
       - name: Take photo of github.com
-        uses: "action"
+        uses: ./action
         with:
           url: https://github.com
           width: 2560
