@@ -8,8 +8,8 @@ const imgur = require("imgur");
   await io.mkdirP(screenshotDir);
 
   const url = core.getInput("url");
-  const width = core.getInput("width");
-  const height = core.getInput("height");
+  const width = parseInt(core.getInput("width"));
+  const height = parseInt(core.getInput("height"));
 
   const timestamp = new Date().getTime();
   const screenshotFile = `${screenshotDir}/screenshot-${timestamp}.png`;
