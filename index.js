@@ -1,15 +1,18 @@
 const core = require("@actions/core");
 const puppeteer = require("puppeteer-core");
 const io = require("@actions/io");
+const imgur = require("imgur");
 
 (async () => {
-  await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
+  const screenshotDir = `${process.env.GITHUB_WORKSPACE}/screenshots/`;
+  await io.mkdirP(screenshotDir);
 
   const url = core.getInput("url");
   const width = core.getInput("width");
   const height = core.getInput("height");
 
   const timestamp = new Date().getTime();
+  const screenshotFile = `${screenshotDir}/screenshot-${timestamp}.png`;
 
   const browser = await puppeteer.launch({
     executablePath: "/usr/bin/google-chrome",
@@ -22,9 +25,12 @@ const io = require("@actions/io");
   await page.waitFor(3000);
   await page.screenshot({
     fullPage: true,
-    path: `${process.env.GITHUB_WORKSPACE}/screenshots/screenshot-${timestamp}.png`
+    path: screenshotFile
   });
   await browser.close();
+
+  const result = await imgur.uploadFile(screenshotFile);
+  console.log(result);
 
   core.exportVariable("TIMESTAMP", timestamp);
 })();
