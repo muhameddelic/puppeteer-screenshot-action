@@ -12,3 +12,5 @@ jobs:
         uses: "muhameddelic/puppeteer-screenshot-action@1.0.1"
         with:
           url: https://github.com
+          width: 2560
+          height: 1440
