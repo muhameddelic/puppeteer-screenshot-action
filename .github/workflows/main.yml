@@ -1,0 +1,14 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Take photo of github.com
+        uses: "muhameddelic/puppeteer-screenshot-action@1.0.1"
+        with:
+          url: https://github.com
