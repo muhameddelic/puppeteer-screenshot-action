@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Take photo of github.com
+        uses: "muhameddelic/puppeteer-screenshot-action@test/viewport-dimensions"
+        with:
+          url: https://github.com
+          width: 2560
+          height: 1440
