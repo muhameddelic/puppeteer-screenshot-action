@@ -6,10 +6,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Take photo of github.com
-        uses: "muhameddelic/puppeteer-screenshot-action@1.0.4"
+        uses: "muhameddelic/puppeteer-screenshot-action@1.0.5"
         with:
           url: https://github.com
           width: 2560
