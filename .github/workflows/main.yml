@@ -9,7 +9,7 @@ jobs:
     
     steps:
       - name: Take photo of github.com
-        uses: "muhameddelic/puppeteer-screenshot-action@test/viewport-dimensions"
+        uses: "muhameddelic/puppeteer-screenshot-action@test/cross-platform"
         with:
           url: https://github.com
           width: 2560
