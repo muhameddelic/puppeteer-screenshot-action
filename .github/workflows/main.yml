@@ -16,6 +16,9 @@ jobs:
           RUNNER_CONTEXT: ${{ toJson(runner) }}
         run: echo "$RUNNER_CONTEXT"
 
+      - name: Dump runner Path env var
+        run: echo "$PATH"
+
       - name: Take photo of github.com
         uses: "muhameddelic/puppeteer-screenshot-action@test/cross-platform"
         with:
