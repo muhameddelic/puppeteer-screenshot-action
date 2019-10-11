@@ -11,19 +11,7 @@ jobs:
         os: [ubuntu-16.04, ubuntu-latest, windows-latest, windows-2016, macOS-latest]
 
     steps:
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-             echo "%RUNNER_CONTEXT%"
-
-      - name: Dump runner Path env var
-        run: echo "$PATH"
-             echo "%PATH%"
-
       - name: Take photo of github.com
-        env:
-            RUNNER_CONTEXT: ${{ toJson(runner) }}
         uses: "muhameddelic/puppeteer-screenshot-action@test/cross-platform"
         with:
           url: https://github.com

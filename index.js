@@ -2,12 +2,13 @@ const core = require("@actions/core");
 const puppeteer = require("puppeteer-core");
 const io = require("@actions/io");
 const os = require("os");
-const fs = require("fs");
 
 function chromePath() {
   switch (os.type()) {
     case 'Windows_NT':
       return 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+    case 'Darwin':
+      return '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
     default:
       return '/usr/bin/google-chrome';
   }
@@ -15,18 +16,6 @@ function chromePath() {
 
 (async () => {
   await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
-
-  console.log("OS Info --");
-  console.log(os.type());
-  console.log(os.release());
-  console.log(process.env.RUNNER_CONTEXT);
-  console.log(os.arch());
-  console.log("-- End OS Info")
-
-  const runnerContext = JSON.parse(process.env.RUNNER_CONTEXT);
-  console.log("runnerContext", runnerContext);
-
-  console.log("toolcache", fs.readdirSync(runnerContext.tool_cache));
 
   const url = core.getInput("url");
 
