@@ -37,10 +37,10 @@ function getBrowserPath() {
     defaultViewport: { width, height },
   };
 
-  const browserPath = getBrowserPath();
-  if (browserPath && browserPath.length > 0) {
-    launchOptions.executablePath = browserPath;
-  };
+  // const browserPath = getBrowserPath();
+  // if (browserPath && browserPath.length > 0) {
+  //   launchOptions.executablePath = browserPath;
+  // };
 
   const browser = await puppeteer.launch(launchOptions);
   const page = await browser.newPage();
