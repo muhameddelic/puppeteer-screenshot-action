@@ -38,7 +38,7 @@ function getBrowserPath() {
   };
 
   const browserPath = getBrowserPath();
-  if (browserPath) {
+  if (browserPath && browserPath.length > 0) {
     launchOptions.executablePath = browserPath;
   };
 
