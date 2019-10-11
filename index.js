@@ -2,16 +2,25 @@ const core = require("@actions/core");
 const puppeteer = require("puppeteer-core");
 const io = require("@actions/io");
 const os = require("os");
+const fs = require("fs");
 
-function chromePath() {
-  switch (os.type()) {
-    case 'Windows_NT':
-      return 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
-    case 'Darwin':
-      return '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-    default:
-      return '/usr/bin/google-chrome';
+function getBrowserPath() {
+  let browserPath = '';
+
+  if (os.type() === "Windows_NT") {
+    // Chrome is a 32-bit application, on 64-bit systems it will have a different base installation path.
+    const programFiles = os.arch() === 'x64' ? process.env["PROGRAMFILES(X86)"] : process.env.PROGRAMFILES;
+    browserPath = os.path.join(programFiles, "Google/Chrome/Application/chrome.exe");
+  } else if (os.type() === "Darwin") {
+    browserPath = "/Application/Google Chrome.app/Contents/MacOS/Google Chrome";
+    if (!fs.existsSync(browserPath)) {
+      browserPath = "/Applications/Safari.app/Contents/MacOS/Safari";
+    }
+  } else {
+    browserPath = "/usr/bin/google-chrome"; // Linux
   }
+
+  return os.path.normalize(browserPath);
 }
 
 (async () => {
@@ -24,7 +33,7 @@ function chromePath() {
   const height = parseInt(core.getInput("height"));
 
   const browser = await puppeteer.launch({
-    executablePath: chromePath(),
+    executablePath: getBrowserPath(),
     defaultViewport: { width, height }
   });
   const page = await browser.newPage();
