@@ -4,6 +4,15 @@ const io = require("@actions/io");
 const os = require("os");
 const fs = require("fs");
 
+function chromePath() {
+  switch (os.type()) {
+    case 'Windows_NT':
+      return 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+    default:
+      return '/usr/bin/google-chrome';
+  }
+}
+
 (async () => {
   await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
 
@@ -26,7 +35,7 @@ const fs = require("fs");
   const height = parseInt(core.getInput("height"));
 
   const browser = await puppeteer.launch({
-    executablePath: "/usr/bin/google-chrome",
+    executablePath: chromePath(),
     defaultViewport: { width, height }
   });
   const page = await browser.newPage();
