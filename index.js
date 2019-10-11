@@ -3,6 +3,7 @@ const puppeteer = require("puppeteer-core");
 const io = require("@actions/io");
 const os = require("os");
 const fs = require("fs");
+const path = require("path");
 
 function getBrowserPath() {
   let browserPath = '';
