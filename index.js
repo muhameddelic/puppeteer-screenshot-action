@@ -2,6 +2,7 @@ const core = require("@actions/core");
 const puppeteer = require("puppeteer-core");
 const io = require("@actions/io");
 const os = require("os");
+const fs = require("fs");
 
 (async () => {
   await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
@@ -10,6 +11,11 @@ const os = require("os");
   console.log(os.type());
   console.log(os.release());
   console.log("-- End OS Info")
+  
+  const runnerContext = json.parse(process.env.RUNNER_CONTEXT);
+  console.log(runnerContext);
+  
+  console.log(fs.readdirSync(runnerContext.tool_cache));
 
   const url = core.getInput("url");
 
