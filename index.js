@@ -13,10 +13,10 @@ const fs = require("fs");
   console.log(process.env.RUNNER_CONTEXT);
   console.log(os.arch());
   console.log("-- End OS Info")
-  
-  const runnerContext = json.parse(process.env.RUNNER_CONTEXT);
+
+  const runnerContext = JSON.parse(process.env.RUNNER_CONTEXT);
   console.log("runnerContext", runnerContext);
-  
+
   console.log("toolcache", fs.readdirSync(runnerContext.tool_cache));
 
   const url = core.getInput("url");
