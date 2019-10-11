@@ -33,10 +33,16 @@ function getBrowserPath() {
   const width = parseInt(core.getInput("width"));
   const height = parseInt(core.getInput("height"));
 
-  const browser = await puppeteer.launch({
-    executablePath: getBrowserPath() || undefined,
-    defaultViewport: { width, height }
-  });
+  let launchOptions = {
+    defaultViewport: { width, height },
+  };
+
+  const browserPath = getBrowserPath();
+  if (browserPath) {
+    launchOptions.executablePath = browserPath;
+  };
+
+  const browser = await puppeteer.launch(launchOptions);
   const page = await browser.newPage();
   await page.goto(url, {
     waitUntil: "networkidle2"
