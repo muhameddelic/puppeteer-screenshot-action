@@ -15,7 +15,7 @@ function getBrowserPath() {
   } else if (os.type() === "Darwin") {
     browserPath = "/Application/Google Chrome.app/Contents/MacOS/Google Chrome";
     if (!fs.existsSync(browserPath)) {
-      browserPath = "/Applications/Safari.app/Contents/MacOS/Safari";
+      browserPath = "";
     }
   } else {
     browserPath = "/usr/bin/google-chrome"; // Linux
@@ -34,7 +34,7 @@ function getBrowserPath() {
   const height = parseInt(core.getInput("height"));
 
   const browser = await puppeteer.launch({
-    executablePath: getBrowserPath(),
+    executablePath: getBrowserPath() || undefined,
     defaultViewport: { width, height }
   });
   const page = await browser.newPage();
