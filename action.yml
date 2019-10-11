@@ -3,7 +3,7 @@ description: "Run puppeteer script and generate screenshot"
 author: "Benjamin Lannon <benjamin@lannonbr.com>"
 runs:
   using: "node12"
-  main: "lib/index.js"
+  main: "index.js"
 inputs:
   url:
     required: true
