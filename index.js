@@ -10,7 +10,7 @@ function getBrowserPath() {
   if (os.type() === "Windows_NT") {
     // Chrome is a 32-bit application, on 64-bit systems it will have a different base installation path.
     const programFiles = os.arch() === 'x64' ? process.env["PROGRAMFILES(X86)"] : process.env.PROGRAMFILES;
-    browserPath = os.path.join(programFiles, "Google/Chrome/Application/chrome.exe");
+    browserPath = path.join(programFiles, "Google/Chrome/Application/chrome.exe");
   } else if (os.type() === "Darwin") {
     browserPath = "/Application/Google Chrome.app/Contents/MacOS/Google Chrome";
     if (!fs.existsSync(browserPath)) {
@@ -20,7 +20,7 @@ function getBrowserPath() {
     browserPath = "/usr/bin/google-chrome"; // Linux
   }
 
-  return os.path.normalize(browserPath);
+  return path.normalize(browserPath);
 }
 
 (async () => {
