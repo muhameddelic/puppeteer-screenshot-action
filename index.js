@@ -10,6 +10,8 @@ const fs = require("fs");
   console.log("OS Info --");
   console.log(os.type());
   console.log(os.release());
+  console.log(process.env.RUNNER_CONTEXT);
+  console.log(os.arch());
   console.log("-- End OS Info")
   
   const runnerContext = json.parse(process.env.RUNNER_CONTEXT);
