@@ -13,9 +13,9 @@ const fs = require("fs");
   console.log("-- End OS Info")
   
   const runnerContext = json.parse(process.env.RUNNER_CONTEXT);
-  console.log(runnerContext);
+  console.log("runnerContext", runnerContext);
   
-  console.log(fs.readdirSync(runnerContext.tool_cache));
+  console.log("toolcache", fs.readdirSync(runnerContext.tool_cache));
 
   const url = core.getInput("url");
 
