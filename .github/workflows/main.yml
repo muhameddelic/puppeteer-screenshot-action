@@ -17,3 +17,9 @@ jobs:
           url: https://github.com
           width: 2560
           height: 1440
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: screenshot
+          path: ${GITHUB_WORKSPACE}/screenshots
