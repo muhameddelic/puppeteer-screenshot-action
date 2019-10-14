@@ -3,6 +3,7 @@ const puppeteer = require("puppeteer-core");
 const io = require("@actions/io");
 
 async function runAction() {
+  try {
   await io.mkdirP(`${process.env.GITHUB_WORKSPACE}/screenshots/`);
 
   const url = core.getInput("url");
@@ -27,6 +28,9 @@ async function runAction() {
   await browser.close();
 
   core.exportVariable("TIMESTAMP", timestamp);
+  } catch (error) {
+    throw error;
+  }
 }
 
 try {
