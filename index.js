@@ -30,7 +30,7 @@ async function runAction() {
 }
 
 try {
-  async () => await runAction();
+  (async () => await runAction())();
   console.log('Action was run successfully');
 } catch (error) {
   core.setFailed(`Failed to run action. ${error}`);
