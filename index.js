@@ -40,7 +40,7 @@ function getChromePath() {
   await page.waitFor(3000);
   await page.screenshot({
     fullPage: true,
-    path: `${process.env.GITHUB_WORKSPACE}/screenshots/screenshot-${timestamp}.png`
+    path: `${process.env.GITHUB_WORKSPACE}/screenshots/screenshot-${timestamp}-${process.env.IMAGE_NAME}.png`
   });
   await browser.close();
 

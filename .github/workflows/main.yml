@@ -38,6 +38,8 @@ jobs:
 
       - name: Take photo of github.com
         uses: "muhameddelic/puppeteer-screenshot-action@test/cross-platform"
+        env:
+          IMAGE_NAME: ${{ matrix.os }}
         with:
           url: https://github.com
           width: 2560
