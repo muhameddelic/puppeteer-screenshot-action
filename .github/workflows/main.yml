@@ -37,7 +37,7 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
 
       - name: Take photo of github.com
-        uses: "muhameddelic/puppeteer-screenshot-action@test/cross-platform"
+        uses: "muhameddelic/puppeteer-screenshot-action@test/full-page-parameter"
         env:
           IMAGE_NAME: ${{ matrix.os }}
         with:
