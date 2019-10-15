@@ -11,13 +11,15 @@ function getChromePath() {
     // Chrome is usually installed as a 32-bit application, on 64-bit systems it will have a different installation path.
     const programFiles = os.arch() === 'x64' ? process.env["PROGRAMFILES(X86)"] : process.env.PROGRAMFILES;
     browserPath = path.join(programFiles, "Google/Chrome/Application/chrome.exe");
-  } else if (os.type() === "Darwin") {
-    browserPath = "/Application/Google Chrome.app/Contents/MacOS/Google Chrome";
-  } else {
-    browserPath = "/usr/bin/google-chrome"; // Linux
+  } else if (os.type() === "Linux") {
+    browserPath = "/usr/bin/google-chrome";
   }
 
-  return path.normalize(browserPath);
+  if (browserPath && browserPath.length > 0) {
+    return path.normalize(browserPath);
+  }
+
+  throw new TypeError(`Cannot run action. ${os.type} is not supported.`);
 }
 
 (async () => {
@@ -28,6 +30,7 @@ function getChromePath() {
   const timestamp = new Date().getTime();
   const width = parseInt(core.getInput("width"));
   const height = parseInt(core.getInput("height"));
+  const fullPage = core.getInput("fullPage") === "true";
 
   const browser = await puppeteer.launch({
     executablePath: getChromePath(),
@@ -39,8 +42,8 @@ function getChromePath() {
   });
   await page.waitFor(3000);
   await page.screenshot({
-    fullPage: true,
-    path: `${process.env.GITHUB_WORKSPACE}/screenshots/screenshot-${timestamp}-${process.env.IMAGE_NAME}.png`
+    fullPage,
+    path: `${process.env.GITHUB_WORKSPACE}/screenshots/screenshot-${timestamp}.png`
   });
   await browser.close();
 
