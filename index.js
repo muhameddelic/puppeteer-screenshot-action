@@ -20,7 +20,7 @@ const io = require("@actions/io");
   await page.goto(url, {
     waitUntil: "networkidle2"
   });
-  await page.waitFor(3000);
+  await page.waitFor(5000);
   await page.screenshot({
     fullPage,
     path: `${process.env.GITHUB_WORKSPACE}/screenshots/screenshot-${timestamp}.png`
